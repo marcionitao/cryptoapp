@@ -3,3 +3,10 @@
 
 
 # cryptoapp
+Desktop application that alerts to certain values of a Cryptocurrency.
+
+
+## Technologies:
+- ElectronJS
+- Node
+- coinmarketcap api

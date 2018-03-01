@@ -1,6 +1,7 @@
-const {app, BrowserWindow} = require('electron')
-  const path = require('path')
-  const url = require('url')
+const {app, BrowserWindow, Menu} = require('electron')
+  const path = require('path') // open file
+  const url = require('url') // open file
+  const shell = require('electron').shell // To open a browser window
   
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
@@ -29,6 +30,29 @@ const {app, BrowserWindow} = require('electron')
     })
   }
   
+  // which is where our menu is actually defined and built, within a series of arrays and objects.
+  var menu = Menu.buildFromTemplate([
+    {
+        label: 'Menu',
+        submenu: [
+            {label:'Adjust Notification Value'},
+            {label:'CoinMarketCap', 
+                click() {shell.openExternal('https://coinmarketcap.com')}, 
+                accelerator: 'CmdOrCtrl+Shift+C'},
+            {type:'separator'},  // Add this
+            {label:'Exit', 
+            click() {app.quit()}}
+        ]
+    },  
+    {
+        label: 'Info'
+    }
+
+  ])
+
+  // Finally, use .setApplicationMenu to set the menu.
+  Menu.setApplicationMenu(menu);
+
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
