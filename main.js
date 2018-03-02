@@ -3,6 +3,8 @@ const {app, BrowserWindow, Menu} = require('electron')
   const url = require('url') // open file
   const shell = require('electron').shell // To open a browser window
 
+  // Electron IPC (Inter-Process Communication), which sends JSON data between two different processes: main and renderer.
+  const ipc = require('electron').ipcMain
   // which refreshes the app automatically upon certain file changes.
   require('electron-reload')(__dirname)
   
@@ -77,6 +79,11 @@ const {app, BrowserWindow, Menu} = require('electron')
       createWindow()
     }
   })
-  
-  // In this file you can include the rest of your app's specific main process
-  // code. You can also put them in separate files and require them here.
+
+  /* the ipc.on() method to specify the name of a message that will be sent from our add.html window, 
+  and once received, we reference win, which is bound to our index.html window, and .webContents.send() 
+  to send the transmitted value from add.html. We're calling it targetPriceVal and the value is the arg. 
+  */
+  ipc.on('update-notify-value', function (event, arg) {
+    win.webContents.send('targetPriceVal', arg)
+  })

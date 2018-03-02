@@ -4,10 +4,13 @@ const path = require('path')
 const axios = require('axios');
 const BrowserWindow = electron.remote.BrowserWindow // launch a new window in our Electron app.
 
+const ipc = electron.ipcRenderer
+
 // to listen for click events on the notify button
 const notifyBtn = document.getElementById('notifyBtn') 
 
 // a variable to give us access to the h1 element, where the price of BTC will be displayed.
+var targetPriceVal;
 var price = document.querySelector('h1')
 var targetPrice = document.getElementById('targetPrice')
 
@@ -39,4 +42,9 @@ notifyBtn.addEventListener('click', function (event) {
     // load the path of add.html and then .show() it.
     win.loadURL(modalPath)
     win.show()
+})
+
+ipc.on('targetPriceVal', function (event, arg) {
+    targetPriceVal = Number(arg);
+    targetPrice.innerHTML = '$'+targetPriceVal.toLocaleString('en')
 })
