@@ -8,3 +8,5 @@ closeBtn.addEventListener('click', function (event) {
     var window = remote.getCurrentWindow();
     window.close();
 })
+
+// 35:31 pause tutorial 5 - Integrating an HTTP Library with Electron
