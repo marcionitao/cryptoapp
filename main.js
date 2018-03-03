@@ -4,7 +4,7 @@ const {app, BrowserWindow, Menu} = require('electron')
   const shell = require('electron').shell // To open a browser window
 
   // Electron IPC (Inter-Process Communication), which sends JSON data between two different processes: main and renderer.
-  const ipc = require('electron').ipcMain
+  const ipc = require('electron').ipcMain;
   // which refreshes the app automatically upon certain file changes.
   require('electron-reload')(__dirname)
   
